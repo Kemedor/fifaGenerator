@@ -1,27 +1,13 @@
-#moins {
-	position: absolute;
-	left: 400px;
+@import "indexStyle.css";
+
+.tournamentForm {
+	margin-left: 10px;
 }
 
 .plusMinusInput {
-	position: absolute;
-	left: 419px;
 	text-align: center;
 }
 
-#plus {
-	position: absolute;
-	left: 507px;
+.tournamentDetails {
+	margin-left: 10px;
 }
-
-.select {
-	position: absolute;
-	left: 400px;
-}
-
-#missingFieldError {
-	color: red; 
-	position: absolute;
-	left: 400px;
-}
-

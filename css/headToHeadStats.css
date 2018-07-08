@@ -1,20 +1,10 @@
-#player1 {
-	position:absolute;
-	color:blue;
+@import "indexStyle.css";
+
+.form-inline label {
+	font-size: 1.1em;
 }
 
-#player2 {
-	position:absolute;
-	left:800px;
-	color:red;
-}
 
-#rest {
-	position:relative;
-	color:black;
-	left:400px;
-}
-
-#menu {
-	left:20px;
+.form-inline input {
+	margin-right: 5px;
 }
