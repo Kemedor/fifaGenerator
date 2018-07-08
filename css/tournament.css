@@ -1,0 +1,27 @@
+#moins {
+	position: absolute;
+	left: 400px;
+}
+
+.plusMinusInput {
+	position: absolute;
+	left: 419px;
+	text-align: center;
+}
+
+#plus {
+	position: absolute;
+	left: 507px;
+}
+
+.select {
+	position: absolute;
+	left: 400px;
+}
+
+#missingFieldError {
+	color: red; 
+	position: absolute;
+	left: 400px;
+}
+

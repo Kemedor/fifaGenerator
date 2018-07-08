@@ -1,0 +1,62 @@
+#player1Name {
+	position:relative;
+	left:47px;
+	margin-right:47px;
+	margin-bottom:10px;
+}
+
+#player2Name {
+	position:relative;
+	left:48px;
+	margin-bottom:10px;
+}
+
+#player1Team {
+	position:relative;
+	left:50px;
+	margin-right:50px;
+	margin-bottom:10px;
+}
+
+#player2Team {
+	position:relative;
+	left:51px;
+	margin-bottom:10px;
+}
+
+#player1Goals {
+	position:relative;
+	margin-bottom:10px;
+}
+
+#player2Goals {
+	position:relative;
+	margin-bottom:10px;
+}
+
+#newPlayer {
+	position:absolute;
+	left:50px;
+	top:200px;
+}
+
+#newMatch {
+	position:absolute;
+	left:500px;
+	top:200px;
+}
+
+#overtime {
+	margin-bottom:10px;
+}
+
+#penalties {
+	margin-bottom:10px;
+}
+
+#message {
+	position:relative;
+	top:50px;
+	color:red;
+	text-align: center;
+}

@@ -1,0 +1,20 @@
+#player1 {
+	position:absolute;
+	color:blue;
+}
+
+#player2 {
+	position:absolute;
+	left:800px;
+	color:red;
+}
+
+#rest {
+	position:relative;
+	color:black;
+	left:400px;
+}
+
+#menu {
+	left:20px;
+}
