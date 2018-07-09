@@ -357,6 +357,7 @@ class Stats {
 	</head>
 
 	<body>
+		<div class="container-fluid">
 		<nav id="menu" class="navbar">
 			<div class="fifadiv">
 				<img/>
@@ -489,6 +490,6 @@ class Stats {
 				<input class="btn" type="submit" name="submitNewMatch" value="Add">
 			</form>
 		</section>
+		</div>
 	</body>
-
 </html>

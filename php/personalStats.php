@@ -176,6 +176,7 @@ class Stats {
 	</script>
 
 	<body>
+		<div class="container-fluid">
 		<nav id="menu" class="navbar">
 			<div class="fifadiv">
 				<img/>
@@ -223,66 +224,149 @@ class Stats {
 					?>
 				</select>
 
-				<li> Player Name: <?php echo htmlspecialchars($_SESSION['player']->name);?> </li>
 
-				<div id="statsView1">
-					<li> Matches Played: <?php echo htmlspecialchars($_SESSION['player']->stats->matchesPlayed);?> </li>
-					<li> Wins: <?php echo htmlspecialchars($_SESSION['player']->stats->wins);?> </li>
-					<li> Draws: <?php echo htmlspecialchars($_SESSION['player']->stats->draws);?> </li>
-					<li> Loses: <?php echo htmlspecialchars($_SESSION['player']->stats->loses);?> </li>
-					<li> Goals Scored: <?php echo htmlspecialchars($_SESSION['player']->stats->goalsScored);?> </li>
-					<li> Goals Against: <?php echo htmlspecialchars($_SESSION['player']->stats->goalsAgainst);?> </li>
-					<li> Knockouts Played: <?php echo htmlspecialchars($_SESSION['player']->stats->knockoutsPlayed);?> </li>
-					<li> Knockouts Won: <?php echo htmlspecialchars($_SESSION['player']->stats->knockoutsWon);?> </li>
-					<li> Knockouts Finalist: <?php echo htmlspecialchars($_SESSION['player']->stats->knockoutsFinalist);?> </li>
-					<li> League and Knockouts Played: <?php echo htmlspecialchars($_SESSION['player']->stats->leagueAndKnockoutPlayed);?> </li>
-					<li> League and Knockouts Won: <?php echo htmlspecialchars($_SESSION['player']->stats->leagueAndKnockoutWon);?> </li>
-					<li> League and Knockouts Finalist: <?php echo htmlspecialchars($_SESSION['player']->stats->leagueAndKnockoutFinalist);?> </li>
+				<section>
+					<div class="row">
+						<h2><?php echo htmlspecialchars($_SESSION['player']->name);?> </h2>
+					</div>
 
-					<li> Win Ratio: <?php echo htmlspecialchars($_SESSION['player']->stats->winRatio . "%");?> </li>
-					<li> Draw Ratio: <?php echo htmlspecialchars($_SESSION['player']->stats->drawRatio . "%");?> </li>
-					<li> Lose Ratio: <?php echo htmlspecialchars($_SESSION['player']->stats->loseRatio . "%");?> </li>
-					<li> Average Goals Scored: <?php echo htmlspecialchars($_SESSION['player']->stats->averageGoalsScored);?> </li>
-					<li> Average Goals Against: <?php echo htmlspecialchars($_SESSION['player']->stats->averageGoalsAgainst);?> </li>
+					<div class="row">
+						<div class="col-md-6" style="margin: auto; text-align: center;">
+							<figure>
+								<canvas id="win-lose-chart"></canvas>
+								<figcaption>
+									<em>
+										Total matches: <?php echo htmlspecialchars($_SESSION['player']->stats->matchesPlayed);?>
+									</em>
+								</figcaption>
+							</figure>
+						</div>
+						<div class="col-md-6" style="margin: auto; text-align: center;">
+							<figure>
+								<canvas id="goals-chart"></canvas>
+								<figcaption><em>Goals scored and against:
+									average +<?php echo htmlspecialchars($_SESSION['player']->stats->averageGoalsScored);?>,
+											-<?php echo htmlspecialchars($_SESSION['player']->stats->averageGoalsAgainst);?></em>
+								</figcaption>
+							</figure>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6" style="margin: auto; text-align: center;">
+							<figure>
+								<canvas id="knockout-chart"></canvas>
+								<figcaption>
+									<em>
+										Knockout figures
+									</em>
+								</figcaption>
+							</figure>
+						</div>
+						<div class="col-md-6" style="margin: auto; text-align: center;">
+							<figure>
+								<canvas id="league-chart"></canvas>
+								<figcaption>
+									<em>
+										League & Knockout figures
+									</em>
+								</figcaption>
+							</figure>
+						</div>
+					</div>
+					<?php
+					for ($i=0; $i < count($_SESSION['teamPlayer']); $i++) {
+					?>
 
-				</div>
+					<div id="<?php echo htmlspecialchars("statsView" . ($i+2));?>" style="display:none;">
+						<li> Team Name: <?php echo htmlspecialchars($_SESSION['teamPlayer'][$i]->teamName);?> </li>
+						<li> Matches Played: <?php echo htmlspecialchars($_SESSION['teamPlayer'][$i]->stats->matchesPlayed);?> </li>
+						<li> Goals Scored: <?php echo htmlspecialchars($_SESSION['teamPlayer'][$i]->stats->goalsScored);?> </li>
+						<li> Goals Against: <?php echo htmlspecialchars($_SESSION['teamPlayer'][$i]->stats->goalsAgainst);?> </li>
 
-				<?php
-				for ($i=0; $i < count($_SESSION['teamPlayer']); $i++) {
-				?>
+						<li> Knockouts Played: <?php echo htmlspecialchars($_SESSION['teamPlayer'][$i]->stats->knockoutsPlayed);?> </li>
+						<li> Knockouts Won: <?php echo htmlspecialchars($_SESSION['teamPlayer'][$i]->stats->knockoutsWon);?> </li>
+						<li> Knockouts Finalist: <?php echo htmlspecialchars($_SESSION['teamPlayer'][$i]->stats->knockoutsFinalist);?> </li>
 
-				<div id="<?php echo htmlspecialchars("statsView" . ($i+2));?>" style="display:none;">
-					<li> Team Name: <?php echo htmlspecialchars($_SESSION['teamPlayer'][$i]->teamName);?> </li>
-					<li> Matches Played: <?php echo htmlspecialchars($_SESSION['teamPlayer'][$i]->stats->matchesPlayed);?> </li>
-					<li> Wins: <?php echo htmlspecialchars($_SESSION['teamPlayer'][$i]->stats->wins);?> </li>
-					<li> Draws: <?php echo htmlspecialchars($_SESSION['teamPlayer'][$i]->stats->draws);?> </li>
-					<li> Loses: <?php echo htmlspecialchars($_SESSION['teamPlayer'][$i]->stats->loses);?> </li>
-					<li> Goals Scored: <?php echo htmlspecialchars($_SESSION['teamPlayer'][$i]->stats->goalsScored);?> </li>
-					<li> Goals Against: <?php echo htmlspecialchars($_SESSION['teamPlayer'][$i]->stats->goalsAgainst);?> </li>
-					<li> Knockouts Played: <?php echo htmlspecialchars($_SESSION['teamPlayer'][$i]->stats->knockoutsPlayed);?> </li>
-					<li> Knockouts Won: <?php echo htmlspecialchars($_SESSION['teamPlayer'][$i]->stats->knockoutsWon);?> </li>
-					<li> Knockouts Finalist: <?php echo htmlspecialchars($_SESSION['teamPlayer'][$i]->stats->knockoutsFinalist);?> </li>
-					<li> League and Knockouts Played: <?php echo htmlspecialchars($_SESSION['teamPlayer'][$i]->stats->leagueAndKnockoutPlayed);?> </li>
-					<li> League and Knockouts Won: <?php echo htmlspecialchars($_SESSION['teamPlayer'][$i]->stats->leagueAndKnockoutWon);?> </li>
-					<li> League and Knockouts Finalist: <?php echo htmlspecialchars($_SESSION['teamPlayer'][$i]->stats->leagueAndKnockoutFinalist);?> </li>
+						<li> League and Knockouts Played: <?php echo htmlspecialchars($_SESSION['teamPlayer'][$i]->stats->leagueAndKnockoutPlayed);?> </li>
+						<li> League and Knockouts Won: <?php echo htmlspecialchars($_SESSION['teamPlayer'][$i]->stats->leagueAndKnockoutWon);?> </li>
+						<li> League and Knockouts Finalist: <?php echo htmlspecialchars($_SESSION['teamPlayer'][$i]->stats->leagueAndKnockoutFinalist);?> </li>
 
-					<li> Win Ratio: <?php echo htmlspecialchars($_SESSION['teamPlayer'][$i]->stats->winRatio . "%");?> </li>
-					<li> Draw Ratio: <?php echo htmlspecialchars($_SESSION['teamPlayer'][$i]->stats->drawRatio . "%");?> </li>
-					<li> Lose Ratio: <?php echo htmlspecialchars($_SESSION['teamPlayer'][$i]->stats->loseRatio . "%");?> </li>
-					<li> Average Goals Scored: <?php echo htmlspecialchars($_SESSION['teamPlayer'][$i]->stats->averageGoalsScored);?> </li>
-					<li> Average Goals Against: <?php echo htmlspecialchars($_SESSION['teamPlayer'][$i]->stats->averageGoalsAgainst);?> </li>
-				</div>
+						<!-- <li> Win Ratio: <?php echo htmlspecialchars($_SESSION['teamPlayer'][$i]->stats->winRatio . "%");?> </li>
+						<li> Draw Ratio: <?php echo htmlspecialchars($_SESSION['teamPlayer'][$i]->stats->drawRatio . "%");?> </li>
+						<li> Lose Ratio: <?php echo htmlspecialchars($_SESSION['teamPlayer'][$i]->stats->loseRatio . "%");?> </li> -->
+						<li> Average Goals Scored: <?php echo htmlspecialchars($_SESSION['teamPlayer'][$i]->stats->averageGoalsScored);?> </li>
+						<li> Average Goals Against: <?php echo htmlspecialchars($_SESSION['teamPlayer'][$i]->stats->averageGoalsAgainst);?> </li>
+					</div>
 
-				<?php
-				}
-				?>
+					<script type="text/javascript">
+						var winLoseData = [
+							   <?php echo htmlspecialchars($_SESSION['player']->stats->wins);?>,
+							   <?php echo htmlspecialchars($_SESSION['player']->stats->loses);?>,
+							   <?php echo htmlspecialchars($_SESSION['player']->stats->draws);?>];
+						drawDoughnutChart(winLoseData, ['green', 'red', 'gray'],
+										['Wins', 'Loses', 'Draws'], "win-lose-chart");
 
+						var goalsData = [
+								<?php echo htmlspecialchars($_SESSION['player']->stats->goalsScored);?>,
+							    <?php echo htmlspecialchars($_SESSION['player']->stats->goalsAgainst);?>];
+						drawDoughnutChart(goalsData, ['green', 'red'],
+										['Goals scored', 'Goals against'], "goals-chart");
+
+						if (<?php echo htmlspecialchars($_SESSION['player']->stats->knockoutsPlayed);?> > 0) {
+							var knockoutData = [
+								<?php echo htmlspecialchars($_SESSION['player']->stats->knockoutsWon);?>,
+								<?php echo htmlspecialchars($_SESSION['player']->stats->knockoutsFinalist);?>,
+								<?php echo htmlspecialchars($_SESSION['player']->stats->knockoutsPlayed);?>
+								- <?php echo htmlspecialchars($_SESSION['player']->stats->knockoutsWon);?>
+								- <?php echo htmlspecialchars($_SESSION['player']->stats->knockoutsFinalist);?>];
+								drawDoughnutChart(knockoutData, ['green', 'orange', 'red'],
+								['Knockouts won', 'Knockouts Reached Final', "Knockouts Lost"], "knockout-chart");
+						}
+						else {
+							document.getElementById("knockout-chart").parentNode
+								.innerHTML = '<strong class="lala">No knockouts played</strong>';
+						}
+
+						if (<?php echo htmlspecialchars($_SESSION['player']->stats->leagueAndKnockoutPlayed);?> > 0) {
+							var knockoutData = [
+								<?php echo htmlspecialchars($_SESSION['player']->stats->leagueAndKnockoutWon);?>,
+								<?php echo htmlspecialchars($_SESSION['player']->stats->leagueAndKnockoutFinalist);?>,
+								<?php echo htmlspecialchars($_SESSION['player']->stats->leagueAndKnockoutPlayed);?>
+								- <?php echo htmlspecialchars($_SESSION['player']->stats->leagueAndKnockoutWon);?>
+								- <?php echo htmlspecialchars($_SESSION['player']->stats->leagueAndKnockoutFinalist);?>];
+								drawDoughnutChart(knockoutData, ['green', 'orange', 'red'],
+								['League & Knockouts won', 'League & Knockouts Reached Final', "League & Knockouts Lost"], "league-chart");
+						}
+						else {
+							document.getElementById("league-chart").parentNode
+								.innerHTML = '<strong class="lala">No league & knockouts played</strong>';
+						}
+
+						function drawDoughnutChart(data, colors, labels, chartId) {
+							var chartData  = {
+								datasets: [{
+									data: data,
+									backgroundColor: colors
+								}],
+								labels: labels
+							};
+							var ctx = document.getElementById(chartId).getContext('2d');
+							var chart = new Chart(ctx, {
+								type: 'doughnut',
+								data: chartData
+							});
+						}
+					</script>
+
+					<?php
+					}
+					?>
+				</section>
 			</form>
 
 		<?php
 		}
 		?>
-
+		</div>
 	</body>
-
 </html>

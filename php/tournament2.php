@@ -78,7 +78,7 @@ function connect_to_db() {
 	</head>
 
 	<body>
-
+		<div class="container-fluid">
 		<nav id="menu" class="navbar">
 			<div class="fifadiv">
 				<img/>
@@ -117,8 +117,8 @@ function connect_to_db() {
 			?>
 				<div class="form-group row">
 					<div class="input-group col-sm-2">
-						<input class="form-control" type="text" size="8" name="<?php echo htmlspecialchars("playerName" + $i);?>" id="<?php echo htmlspecialchars("playerName" + $i);?>" required>
-						<input class="form-control" type="text" size="8" name="<?php echo htmlspecialchars("playerName" + $i);?>" id="<?php echo htmlspecialchars("teamName" + $i);?>" required>
+						<input class="form-control" type="text" size="8" placeholder="Player name" name="<?php echo htmlspecialchars("playerName" + $i);?>" id="<?php echo htmlspecialchars("playerName" + $i);?>" required>
+						<input class="form-control" type="text" size="8" placeholder="Team" name="<?php echo htmlspecialchars("teamName" + $i);?>" id="<?php echo htmlspecialchars("teamName" + $i);?>" required>
 					</div>
 				</div>
 			<?
@@ -127,6 +127,7 @@ function connect_to_db() {
 			?>
 			<input class="btn" type="submit" name="submit" value="Create Tournament">
 		</form>
+		</div>
 	</body>
 
 </html>

@@ -174,6 +174,7 @@ window.onload=function() {
 </script>
 
 	<body>
+		<div class="container-fluid">
 		<nav id="menu" class="navbar">
 			<div class="fifadiv">
 				<img/>
@@ -228,36 +229,35 @@ window.onload=function() {
 
 				<div id="statsView1" class="selectShowHide">
 
-
-					<div id="player1">
-						<li> <?php echo htmlspecialchars($_SESSION['headToHead']->player1Name);?> </li>
-						<br><br><br>
-						<li> Wins: <?php echo htmlspecialchars($_SESSION['headToHead']->stats->player1Wins);?> </li>
-						<li> Win Ratio: <?php echo htmlspecialchars($_SESSION['headToHead']->stats->player1WinRatio . "%");?> </li>
-						<br><br>
-						<li> Goals Scored: <?php echo htmlspecialchars($_SESSION['headToHead']->stats->player1Goals);?> </li>
-						<li> Average Goals Scored: <?php echo htmlspecialchars($_SESSION['headToHead']->stats->player1AverageGoalsScored);?> </li>
+					<div class="row">
+						<div class="col-md-6" style="margin: auto; text-align: center;">
+							<figure>
+								<canvas id="win-lose-chart"></canvas>
+								<figcaption>
+									<em>
+										Total matches: <?php echo htmlspecialchars($_SESSION['headToHead']->stats->matchesPlayed);?>
+									</em>
+								</figcaption>
+							</figure>
+						</div>
+						<div class="col-md-6" style="margin: auto; text-align: center;">
+							<figure>
+								<canvas id="goals-chart"></canvas>
+								<figcaption>
+									<div class="row">
+										<em> <?php echo htmlspecialchars($_SESSION['headToHead']->player1Name);?> scores
+											<?php echo htmlspecialchars($_SESSION['headToHead']->stats->player1AverageGoalsScored);?> on average.
+										</em>
+									</div>
+									<div class="row">
+										<em> <?php echo htmlspecialchars($_SESSION['headToHead']->player2Name);?> scores
+											<?php echo htmlspecialchars($_SESSION['headToHead']->stats->player2AverageGoalsScored);?> on average.
+										</em>
+									</div>
+								</figcaption>
+							</figure>
+						</div>
 					</div>
-
-					<div id="player2">
-						<li> <?php echo htmlspecialchars($_SESSION['headToHead']->player2Name);?> </li>
-						<br><br><br>
-						<li> Wins: <?php echo htmlspecialchars($_SESSION['headToHead']->stats->player2Wins);?> </li>
-						<li> Win Ratio: <?php echo htmlspecialchars($_SESSION['headToHead']->stats->player2WinRatio . "%");?> </li>
-						<br><br>
-						<li> Goals Scored: <?php echo htmlspecialchars($_SESSION['headToHead']->stats->player2Goals);?> </li>
-						<li> Average Goals Scored: <?php echo htmlspecialchars($_SESSION['headToHead']->stats->player2AverageGoalsScored);?> </li>
-					</div>
-
-					<div id="rest">
-						<br><br>
-						<li> Matches Played: <?php echo htmlspecialchars($_SESSION['headToHead']->stats->matchesPlayed);?> </li>
-						<br>
-						<li> Draws: <?php echo htmlspecialchars($_SESSION['headToHead']->stats->draws);?> </li>
-						<li> Draw Ratio: <?php echo htmlspecialchars($_SESSION['headToHead']->stats->drawRatio . "%");?> </li>
-					</div>
-
-
 
 				</div>
 
@@ -296,28 +296,55 @@ window.onload=function() {
 						<li> Draws: <?php echo htmlspecialchars($_SESSION['headToHeadPerTeam'][$i]->stats->draws);?> </li>
 						<li> Draw Ratio: <?php echo htmlspecialchars($_SESSION['headToHeadPerTeam'][$i]->stats->drawRatio . "%");?> </li>
 					</div>
-
-
-
 				</div>
 
 				<?php
 				}
 				?>
-
 			</form>
+			<script type="text/javascript">
+				if (<?php echo htmlspecialchars($_SESSION['headToHead']->stats->matchesPlayed);?> === 0) {
+					document.getElementById("statsView1").parentNode
+						.innerHTML = '<strong class="lala">No mathes between these players were found.</strong>';
+				}
+				else {
+					var winLoseData = [
+						   <?php echo htmlspecialchars($_SESSION['headToHead']->stats->player1Wins);?>,
+						   <?php echo htmlspecialchars($_SESSION['headToHead']->stats->player2Wins);?>,
+						   <?php echo htmlspecialchars($_SESSION['headToHead']->stats->draws);?>];
+					drawDoughnutChart(winLoseData, ['green', 'red', 'gray'],
+									['Wins of ' + <?php echo json_encode(htmlspecialchars($_SESSION['headToHead']->player1Name));?>,
+									'Wins of ' + <?php echo json_encode(htmlspecialchars($_SESSION['headToHead']->player2Name));?>,
+									'Draws'], "win-lose-chart");
 
+					var goalsData = [
+							<?php echo htmlspecialchars($_SESSION['headToHead']->stats->player1Goals);?>,
+							<?php echo htmlspecialchars($_SESSION['headToHead']->stats->player2Goals);?>];
+					drawDoughnutChart(goalsData, ['green', 'red'],
+									['Goals scored by ' + <?php echo json_encode(htmlspecialchars($_SESSION['headToHead']->player1Name));?>,
+									'Goals scored by ' + <?php echo json_encode(htmlspecialchars($_SESSION['headToHead']->player2Name));?>]
+									,"goals-chart");
+				}
 
-
-
-
+				function drawDoughnutChart(data, colors, labels, chartId) {
+					var chartData  = {
+						datasets: [{
+							data: data,
+							backgroundColor: colors
+						}],
+						labels: labels
+					};
+					var ctx = document.getElementById(chartId).getContext('2d');
+					var chart = new Chart(ctx, {
+						type: 'doughnut',
+						data: chartData
+					});
+				}
+			</script>
 		<?php
 		}
 		?>
-
-
-
-
+		</div>
 	</body>
 
 </html

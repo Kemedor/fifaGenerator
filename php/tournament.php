@@ -34,7 +34,7 @@ function test_input($data) {
 	</head>
 
 	<body>
-
+		<div class="container-fluid">
 		<nav id="menu" class="navbar">
 			<div class="fifadiv">
 				<img/>
@@ -153,8 +153,7 @@ function test_input($data) {
 
 			<input class="btn" type="submit" name="submit" value="Pick Teams">
 		</form>
-
-
+		</div>
 	</body>
 
 </html>
