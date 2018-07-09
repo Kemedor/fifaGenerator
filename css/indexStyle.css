@@ -1,0 +1,35 @@
+.navbar {
+	position: fixed;
+	top: 0;
+}
+
+.navbar .fifadiv {
+	margin: 0 auto;
+}
+
+.navbar .fifadiv img {
+	content:url("./fifa.png");
+}
+
+.navbar img {
+	display: block;
+	height: 300px;
+	width: 100%;
+	margin-bottom: 25px;
+}
+
+.navbar ul {
+	display: block;
+	margin: 0 auto;
+}
+
+.navbar li {
+	display: inline-block;
+	font-size: 1.1em;
+}
+
+.navbar li:not(:last-child) {
+	padding-right: 10px;
+	border-right: solid 2px;
+	margin-right: 10px;
+}

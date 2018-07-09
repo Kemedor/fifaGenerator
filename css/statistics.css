@@ -1,0 +1,9 @@
+@import "indexStyle.css";
+
+#findPlayer {
+	margin-left: 10px;
+}
+
+#findPlayer .btn {
+	margin-left: 10px;
+}
